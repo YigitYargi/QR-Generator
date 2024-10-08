@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome to QR Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+<p>Enter your text or URL</p>
+
+<input type="text" , placeholder="Text or URL" id = "qrText">
+
+<div id="imgBox">
+    <img src="" id="qrImg">
+
+</div>
+
+<button onclick="GenerateQR()">Generate QR Code</button>
+
+<p id="errorMsg" style="color: red; display: none;">Please enter some text or a URL!</p>
+
+</div>
+
+<script>
+
+let imgBox = document.getElementById("imgBox");
+let qrImg = document.getElementById("qrImg");
+let qrText = document.getElementById("qrText");
+
+
+
+function GenerateQR() {
+  if(qrText.value.length > 0) {
+
+    qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrText.value;
+    imgBox.classList.add("show-img");
+
+ }
+
+ else {
+    // Kullanıcıya hata mesajını göster
+    qrText.classList.add('error');
+    errorMsg.style.display = "block";  // Hata mesajını göster
+    
+    setTimeout(() => {
+      qrText.classList.remove('error');
+      errorMsg.style.display = "none";  // Bir süre sonra hata mesajını gizle
+    }, 3000);
+  }
+
+}
+
+</script>
+
+</body>
+
+</html>
